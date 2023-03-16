@@ -165,7 +165,7 @@ def train(mymodel, num_epochs, train_dataloader, validation_dataloader, device, 
                 labels = batch["labels"]
             output = mymodel(input_ids, attention_mask)
             predictions = torch.max(output.logits, dim=1).indices
-            model_loss = loss(output.logits, labels)
+            model_loss = loss(output.logits.cuda(), labels)
             model_loss.backward()
             optimizer.step()
             lr_scheduler.step()
@@ -188,7 +188,7 @@ def train(mymodel, num_epochs, train_dataloader, validation_dataloader, device, 
     return train_acc, val_acc
 
 
-def pre_process(model_name, batch_size, device, small_subset=False):
+def pre_process(model_name, batch_size, device, small_subset):
     # download dataset
     print("Loading the dataset ...")
     dataset = load_dataset("boolq")
@@ -276,7 +276,7 @@ def hyper_param(lr_list, num_epochs_list, model_name, batch):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--experiment", type=str, default=None)
-    parser.add_argument("--small_subset", type=bool, default=False)
+    parser.add_argument("--small_subset", type=bool, default=False)  
     parser.add_argument("--num_epochs", type=int, default=1)
     parser.add_argument("--lr", type=float, default=5e-5)
     parser.add_argument("--batch_size", type=int, default=32)
