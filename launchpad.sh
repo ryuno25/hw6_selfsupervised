@@ -23,10 +23,10 @@ pip install -r requirements.txt # install Python dependencies
 # srun python -u classification.py --experiment "overfit" --small_subset True --device cuda --model "distilbert-base-uncased" --batch_size "1" --lr 1e-4 --num_epochs 30 > test.out
 
 # #q6
-# srun python -u classification.py --experiment "overfit" --device cuda --model "distilbert-base-uncased" --batch_size "64" --lr 5e-4 --num_epochs 10 > test2.out
+# srun python -u classification.py --experiment "overfit" --device cuda --model "distilbert-base-uncased" --batch_size "64" --lr 5e-4 --num_epochs 30 > test2.out
 
 # #q7
 srun python -u classification.py --experiment "overfit" --device cuda --model "distilbert-base-uncased" --batch_size "64" --hyperparam True > test3.out
 
 # #q8
-# srun python -u classification.py --experiment "overfit" --small_subset False --device cuda --model "BERT-base-uncased" --batch_size "64" --hyperparam True > test4.out
+# srun python -u classification.py --experiment "overfit" --device cuda --model "BERT-base-uncased" --batch_size "64" --hyperparam True > test4.out
